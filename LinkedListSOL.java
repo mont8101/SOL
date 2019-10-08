@@ -11,7 +11,6 @@ Represents a SOL using Java's implementation of a Linked List
 
 public class LinkedListSOL<E> implements SOL<E>{
     private LinkedList<E> list;
-    
     public LinkedListSOL() {
         list = new LinkedList<E>();
     }
@@ -21,11 +20,19 @@ public class LinkedListSOL<E> implements SOL<E>{
         // creating the list iterator to look for the target
         ListIterator<E> iterator = list.listIterator();
         while (iterator.hasNext()) {
-            if (iterator.next().equals(target)) {
-                // move the target -1 position
-                if(iterator.previous().equals(target)) {
-                    return target;
-                }
+            E current = iterator.next();
+            if (current.equals(target)) {
+                E temp = current;
+                /* move the target -1 position
+                E temp;
+                E currentNext = iterator.next();
+                E previous = iterator.previous();
+                E previous2 = iterator.previous();
+                E previous3 = iterator.previous();
+                */
+                // swap
+                
+                return target;
             }
         }
         // if not found return null
@@ -42,30 +49,12 @@ public class LinkedListSOL<E> implements SOL<E>{
     @Override
     public String prettyStr() {
         StringBuilder toReturn = new StringBuilder("{");
-        ListIterator<E> iterator = new ListIterator<>(list);
+        ListIterator<E> iterator = list.listIterator();
         while (iterator.hasNext()) {
-            toReturn.append(",");
             toReturn.append(iterator.next());
+            toReturn.append(" ");
         }
         toReturn.append("}");
         return toReturn.toString();
-    }
-    
-    public boolean duplicate() {
-        // check if we can do it
-        if (list.isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-    
-    public boolean collapse() {
-        // check if we can do it
-        if (list.isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
     }
 }
