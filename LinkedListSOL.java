@@ -4,34 +4,31 @@ import java.util.ListIterator;
 /**
 Represents a SOL using Java's implementation of a Linked List
 
-@author YOUR NAME HERE
-
+@author Luca Comba
 
 */
-
 public class LinkedListSOL<E> implements SOL<E>{
     private LinkedList<E> list;
+    
     public LinkedListSOL() {
         list = new LinkedList<E>();
     }
     
+    /**
+     * @see SOL#solLookup(java.lang.Object)
+     */
     @Override
     public E solLookup(E target) {
         // creating the list iterator to look for the target
         ListIterator<E> iterator = list.listIterator();
         while (iterator.hasNext()) {
             E current = iterator.next();
-            if (current.equals(target)) {
-                E temp = current;
-                /* move the target -1 position
-                E temp;
-                E currentNext = iterator.next();
-                E previous = iterator.previous();
-                E previous2 = iterator.previous();
-                E previous3 = iterator.previous();
-                */
-                // swap
-                
+            if (current.equals(target) ) {
+                iterator.remove();
+                if (iterator.hasPrevious()) {
+                    iterator.previous();
+                }
+                iterator.add(target);
                 return target;
             }
         }
@@ -39,6 +36,10 @@ public class LinkedListSOL<E> implements SOL<E>{
         return null;
     }
 
+    
+    /**
+     * @see SOL#solAdd(java.lang.Object)
+     */
     @Override
     public boolean solAdd(E toAdd) {
         // adding the object to the list at the end
@@ -46,13 +47,21 @@ public class LinkedListSOL<E> implements SOL<E>{
         return true;
     }
 
+    
+    /**
+     * @see SOL#prettyStr()
+     */
     @Override
     public String prettyStr() {
         StringBuilder toReturn = new StringBuilder("{");
         ListIterator<E> iterator = list.listIterator();
+        E currentValue;
         while (iterator.hasNext()) {
-            toReturn.append(iterator.next());
-            toReturn.append(" ");
+            currentValue = iterator.next();
+            toReturn.append(currentValue);
+            if (iterator.hasNext()) {
+                toReturn.append(",");
+            }
         }
         toReturn.append("}");
         return toReturn.toString();

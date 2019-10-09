@@ -10,6 +10,8 @@ Represents a SOL using a custom implementation of a Linked List
 
 public class CustomSOL<E> implements SOL<E>{
     //Note: Your implementation must provide a constructor with no input parameters.
+    private Node<E> head = null;
+    private int size;
     
     private static class Node<E> {
         private E data;
@@ -27,29 +29,62 @@ public class CustomSOL<E> implements SOL<E>{
         }
     }
     
-    private Node<E> head = null;
-    private int size;
-    
     public CustomSOL() {
         size = 0;
     }
     
+    // Methods
     @Override
     public E solLookup(E target) {
-        return null;
+        Node<E> currentNode = head;
+        Node<E> previousNode = null;
+        Node<E> twoPreviousNode = null;
+        while (currentNode.next != null) {
+            if (currentNode.data.equals(target)) {
+                // swap
+                twoPreviousNode.next = currentNode;
+                currentNode.next = previousNode;
+                previousNode.next = currentNode.next;
+                // return
+                return target;
+            } else {
+                twoPreviousNode = previousNode;
+                previousNode = currentNode;
+                currentNode = currentNode.next;
+            }
+        }
+        if (currentNode.data.equals(target)) {
+            // swap
+            twoPreviousNode.next = currentNode;
+            currentNode.next = previousNode;
+            previousNode.next = currentNode.next;
+            return target;
+        } else {
+            return null;
+        }
+        
     }
     
     @Override
     public boolean solAdd(E toAdd) {
+        Node<E> newNode = new Node<E>(toAdd);
         if (size == 0) {
-            Node<E> newNode = new Node<E>(toAdd);
+            head = newNode;
+            head.next = null;
+            size++;
+            return true;
+        } else if (head.next == null) {
             head.next = newNode;
+            newNode.next = null;
             size++;
             return true;
         } else {
-            Node<E> newNode = new Node<E>(toAdd);
-            head.next = newNode;
-            newNode.next = ;
+            Node<E> currentNode = head.next;
+            while (currentNode.next != null) {
+                currentNode = currentNode.next;
+            }
+            currentNode.next = newNode;
+            newNode.next = null;
             size++;
             return true;
         }
@@ -62,7 +97,7 @@ public class CustomSOL<E> implements SOL<E>{
         while (nodeRef != null) {
             toReturn.append(nodeRef.data);
             if (nodeRef.next != null) {
-                toReturn.append(", ");
+                toReturn.append(",");
             }
             nodeRef = nodeRef.next;
         }
