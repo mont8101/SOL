@@ -53,7 +53,7 @@ public class CustomSOL<E> implements SOL<E>{
                 currentNode = currentNode.next;
             }
         }
-        if (currentNode.data.equals(target)) {
+        if (currentNode.data.equals(target)) { //last one
             // swap
             twoPreviousNode.next = currentNode;
             currentNode.next = previousNode;
@@ -109,7 +109,11 @@ public class CustomSOL<E> implements SOL<E>{
     For each item in the list, create a copy of it.
     */
     public void duplicate(){
-        
+        Node<E> nodeRef = head;
+        while(nodeRef != null) {
+            nodeRef.next = nodeRef.next;
+            nodeRef.next.next = nodeRef.next;
+        }
     }
     
     /**
