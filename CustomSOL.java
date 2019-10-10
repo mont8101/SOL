@@ -39,12 +39,13 @@ public class CustomSOL<E> implements SOL<E>{
         Node<E> currentNode = head;
         Node<E> previousNode = null;
         Node<E> twoPreviousNode = null;
+        
         while (currentNode.next != null) {
             if (currentNode.data.equals(target)) {
                 // swap
                 twoPreviousNode.next = currentNode;
-                currentNode.next = previousNode;
                 previousNode.next = currentNode.next;
+                currentNode.next = previousNode;
                 // return
                 return target;
             } else {
@@ -57,7 +58,7 @@ public class CustomSOL<E> implements SOL<E>{
             // swap
             twoPreviousNode.next = currentNode;
             currentNode.next = previousNode;
-            previousNode.next = currentNode.next;
+            previousNode.next = null;
             return target;
         } else {
             return null;
@@ -114,6 +115,7 @@ public class CustomSOL<E> implements SOL<E>{
             nodeRef.next = nodeRef.next;
             nodeRef.next.next = nodeRef.next;
         }
+        
     }
     
     /**

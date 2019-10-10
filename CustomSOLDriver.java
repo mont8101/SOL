@@ -47,6 +47,18 @@ public class CustomSOLDriver {
         //TEST 7: PrettyStr on an  directory
         System.out.print("TEST 2: PrettyStr() on an 7 sized list. Expected: {1,2,3,4,5,7,6}. Actual: ");
         System.out.println(list.prettyStr());
+        //TEST 8: LookUp an Item in the list
+        System.out.print("TEST 4: solLookup() item 7. Expected: 7. Actual: ");
+        System.out.println(list.solLookup("7"));
+        //TEST 9: PrettyStr on an  directory
+        System.out.print("TEST 2: PrettyStr() on an 7 sized list. Expected: {1,2,3,4,7,5,6}. Actual: ");
+        System.out.println(list.prettyStr());
+        //TEST 10: LookUp an Item in the list
+        System.out.print("TEST 4: solLookup() item 7. Expected: 7. Actual: ");
+        System.out.println(list.solLookup("7"));
+        //TEST 11: PrettyStr on an  directory
+        System.out.print("TEST 2: PrettyStr() on an 7 sized list. Expected: {1,2,3,7,4,5,6}. Actual: ");
+        System.out.println(list.prettyStr());
 	}
 
 }
