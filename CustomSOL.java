@@ -111,9 +111,13 @@ public class CustomSOL<E> implements SOL<E>{
     */
     public void duplicate(){
         Node<E> nodeRef = head;
+		Node<E> dupe = null;
         while(nodeRef != null) {
-            nodeRef.next = nodeRef.next;
-            nodeRef.next.next = nodeRef.next;
+             dupe.next = nodeRef.next;
+			 nodeRef.next = dupe;
+			 dupe.data = nodeRef.data;
+			 size++;
+			 nodeRef = nodeRef.next.next;
         }
         
     }
